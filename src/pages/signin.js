@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import * as EmailValidator from 'email-validator';
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -48,7 +49,7 @@ export default function SignUp() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   function validate() {
-    return email.length > 5 && password.length > 5;
+    return EmailValidator.validate(email) && password.length > 5;
   }
   return (
     <Container component="main" maxWidth="xs">
@@ -93,10 +94,13 @@ export default function SignUp() {
             backgroundColor="blue"
             color="primary"
             className={classes.submit}
-            disabled={!validate()}
+            // disabled={!validate()}
             onClick={() => {
-              routChange('/about');
-              alert(`welcome back ${email}`);
+              if (validate()) {
+                routChange('/about');
+                alert(`welcome back ${email}`);
+              }
+              alert(`bad email or password`);
             }}
           >
             Sign In

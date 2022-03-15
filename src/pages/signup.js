@@ -11,6 +11,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import * as EmailValidator from 'email-validator';
 // import User from './user';
 
 const useStyles = makeStyles((theme) => ({
@@ -56,16 +57,19 @@ export default function SignUp() {
   const [email, setEmail] = React.useState('');
   const [conPassword, setConPassword] = React.useState('');
   const [password, setPassword] = React.useState('');
+
   function validate() {
     return (
-      email.length > 5 &&
+      EmailValidator.validate(email) &&
       password.length > 5 &&
       password.localeCompare(conPassword) === 0 &&
-      fName.length > 1 &&
+      fName.length > 2 &&
       lName.length > 2 &&
-      phone.length > 9
+      phone.length > 9 &&
+      /^[0-9]+$/.test(phone)
     );
   }
+
   // const userList = [];
   // function creatUser(fname, lname, phone, email, password, keyId) {
   //   const user = new User(fname, lname, phone, email, password, keyId);
