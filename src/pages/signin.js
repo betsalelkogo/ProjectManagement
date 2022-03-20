@@ -99,9 +99,11 @@ export default function SignUp() {
               if (validate()) {
                 routChange('/about');
                 alert(`welcome back ${email}`);
+              } else {
+                alert(`bad email or password`);
               }
-              alert(`bad email or password`);
-            }}
+            }
+            }
           >
             Sign In
           </Button>
